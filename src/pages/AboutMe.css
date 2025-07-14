@@ -1,0 +1,14 @@
+.about-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+.about-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
