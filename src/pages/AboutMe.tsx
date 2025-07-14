@@ -1,6 +1,7 @@
 import './AboutMe.css';
 
 const AboutMe = () => {
+  // Test Git config
   return (
     <section className="about-container">
       <h1 className="about-title">About Me</h1>
