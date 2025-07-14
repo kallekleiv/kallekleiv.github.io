@@ -1,39 +1,53 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
-  "vcs": {
-    "enabled": false,
-    "clientKind": "git",
-    "useIgnoreFile": false
-  },
-  "files": {
-    "ignoreUnknown": false,
-    "ignore": [
-      "dist",
-      "build",
-      "node_modules",
-      ".turbo",
-      ".next",
-      "coverage",
-      "public",       // if auto-generated
-      "out",          // used by Next.js static export
-      "tmp",
-      ".cache",
-      ".git"
-    ]
-  },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "semicolons": "always"
+    }
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "complexity": {
+        "noUselessCatch": "error",
+        "noExtraBooleanCast": "error"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      },
+      "style": {
+        "noShoutyConstants": "warn",
+        "useSingleVarDeclarator": "warn"
+      },
+      "suspicious": {
+        "noImplicitAnyLet": "warn",
+        "noEmptyInterface": "error"
+      }
     }
   },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "double"
-    }
+  "files": {
+    "includes": [
+      "**",
+      "!dist/",
+      "!dist/**",
+      "!build/",
+      "!node_modules/",
+      "!*.log",
+      "!*.tmp",
+      "!*.temp",
+      "!.DS_Store",
+      "!*.test.tsx",
+      "!*.test.ts",
+      "!*.min.js"
+    ]
   }
 }

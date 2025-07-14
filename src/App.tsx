@@ -1,6 +1,5 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
@@ -9,7 +8,6 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Torjus Kalleiv</h1>
         <p>Welcome to my personal website!</p>
-        <p>Built with React, TypeScript, esbuild, and Biome.</p>
         <a
           className="App-link"
           href="https://github.com/kallekleiv"
