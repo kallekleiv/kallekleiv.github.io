@@ -60,17 +60,56 @@ const buildOptions = {
 };
 
 if (isDev) {
-  esbuild.context(buildOptions).then(async (ctx) => {
-    await ctx.watch();
+  const WebSocket = require('ws');
+  const wss = new WebSocket.Server({ port: 3001 });
 
-    const { host, port } = await ctx.serve({
-      servedir: 'dist',
-      host: 'localhost',
-      port: 3000,
-    });
+  const clients = new Set();
 
-    console.log(`Development server running at http://${host || 'localhost'}:${port}`);
+  wss.on('connection', (ws) => {
+    clients.add(ws);
+    ws.on('close', () => clients.delete(ws));
   });
-} else {
-  esbuild.build(buildOptions).catch(() => process.exit(1));
+
+  esbuild
+    .context({
+      ...buildOptions,
+      plugins: [
+        {
+          name: 'live-reload',
+          setup(build) {
+            build.onEnd((result) => {
+              if (result.errors.length === 0) {
+                console.log('✅ Build completed - notifying clients...');
+                for (const ws of clients) {
+                  if (ws.readyState === WebSocket.OPEN) {
+                    ws.send('reload');
+                  }
+                }
+              } else {
+                console.log('❌ Build failed:', result.errors);
+              }
+            });
+          },
+        },
+      ],
+    })
+    .then(async (ctx) => {
+      await ctx.watch();
+
+      const { host, port } = await ctx.serve({
+        servedir: 'dist',
+        host: 'localhost',
+        port: 3000,
+      });
+
+      console.log(`🚀 Dev server: http://${host}:${port}`);
+      console.log('👀 Watching for changes (with live reload)...');
+
+      process.on('SIGINT', async () => {
+        console.log('\n🛑 Shutting down...');
+        await ctx.dispose();
+        wss.close();
+        process.exit(0);
+      });
+    });
 }
