@@ -1,0 +1,23 @@
+# Biome ignore patterns
+dist/
+dist/**
+build
+node_modules/
+.turbo
+.next
+coverage
+public
+out
+tmp
+cache
+.cache
+.git
+*.log
+*.tmp
+*.temp
+.DS_Store
+reportWebVitals.ts
+setupTests.ts
+*.test.tsx
+*.test.ts
+*.min.js
