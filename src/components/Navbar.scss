@@ -1,0 +1,14 @@
+.links {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  width: 100%;
+}
+
+li {
+  flex: 1
+}
+
+a {
+  text-decoration: none;
+}

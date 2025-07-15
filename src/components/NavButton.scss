@@ -1,0 +1,27 @@
+$primary-color: #45474b;
+$hover-color: #61dafb;
+$border-color: #000;
+$border-radius: 25px;
+$transition: all 0.3s ease;
+$background-color: #495E57;
+
+// Main button styling
+.nav-button {
+  // Reset default button styles
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  background-color: $background-color;
+  
+  // Layout
+  display: block;
+  width: 100%;
+  padding: 12px 24px;
+  text-align: center;
+  
+  // Appearance
+  color: $primary-color;
+  text-decoration: none;
+  transition: $transition;
+}

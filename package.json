@@ -17,15 +17,19 @@
   "packageManager": "pnpm@10.11.1",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "7.6.3",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.1.1",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "esbuild": "^0.25.6",
+    "esbuild-sass-plugin": "^3.3.1",
     "gh-pages": "^6.3.0",
     "prettier": "^3.6.2",
+    "sass": "^1.89.2",
     "typescript": "^5.8.3"
   },
   "outDir": "./dist"
