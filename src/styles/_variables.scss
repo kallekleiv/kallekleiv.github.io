@@ -1,0 +1,26 @@
+@use 'sass:map';
+
+$colors: (
+    primary: #E5E8D5,
+    secondary: #ADB9BD,
+    accent1: #F0E085,
+    accent2: #7A8B5D,
+
+    gray-100: #f8f9fa,
+    gray-200: #e9ecef,
+    gray-300: #dee2e6,
+    gray-700: #495057,
+    gray-900: #212529,
+
+    background: #D1E1E8,
+
+    text-primary: #2C3E2D,
+    text-secondary: #4A5D4F,
+    text-muted: #6B7C70,
+    text-inverse: #FFFFFF,
+    text-accent: #5A6B3E,
+);
+
+@function color($name) {
+    @return map.get($colors, $name);
+}

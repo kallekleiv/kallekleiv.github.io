@@ -1,6 +1,7 @@
 const esbuild = require('esbuild');
 const path = require('node:path');
 const fs = require('node:fs');
+const { sassPlugin } = require('esbuild-sass-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isDev = process.argv.includes('--dev');
@@ -74,6 +75,7 @@ if (isDev) {
     .context({
       ...buildOptions,
       plugins: [
+        sassPlugin(),
         {
           name: 'live-reload',
           setup(build) {
@@ -96,13 +98,13 @@ if (isDev) {
     .then(async (ctx) => {
       await ctx.watch();
 
-      const { host, port } = await ctx.serve({
+      const { port } = await ctx.serve({
         servedir: 'dist',
         host: 'localhost',
         port: 3000,
       });
 
-      console.log(`🚀 Dev server: http://${host}:${port}`);
+      console.log(`🚀 Dev server: http://localhost:${port}`);
       console.log('👀 Watching for changes (with live reload)...');
 
       process.on('SIGINT', async () => {
@@ -112,4 +114,15 @@ if (isDev) {
         process.exit(0);
       });
     });
+} else {
+  // Production build
+  esbuild
+    .build({
+      ...buildOptions,
+      plugins: [sassPlugin()],
+    })
+    .then(() => {
+      console.log('✅ Production build completed');
+    })
+    .catch(() => process.exit(1));
 }
